@@ -6,6 +6,7 @@
 var arrayRandom =[];
 var arrayNumeroInput = [];
 var punteggio = 0;
+var arrayNumeriIndovinati = [];
 
 $(document).ready(
   function (){
@@ -22,21 +23,25 @@ $(document).ready(
 
     // Da li parte un timer di 30 secondi.
     // Dopo 30 secondi l'utente deve inserire un prompt alla volta i numeri che ha visto precedentemente.
-    setTimeout(getInputNumber, 8000, arrayNumeroInput);
+    // var clock = // DEBUG:
+    setTimeout(getInputNumber, 8000);
     console.log(arrayNumeroInput);
+    // clearTimeout(clock); // DEBUG:
     // Dopo che sono stati inseriti i 5 numeri, il software dice quanti e quali dei numeri da indovinare sono stati individuati
-    for (var i = 0; i < arrayRandom.length; i++) {
-      if (arrayRandom[i] == arrayNumeroInput[i]) {
-        punteggio++;
-      }
 
-    }
-    console.log(punteggio);
+
+
 
   }
 );
 
-
+// for (var i = 0; i < arrayRandom.length; i++) {
+//   if (arrayRandom[i] == arrayNumeroInput[i]) {
+//     punteggio++;
+//     console.log(punteggio);
+//   }else {
+//     console.log('non trovato');
+//   }
 
 
 
@@ -48,11 +53,19 @@ function getRandomIntInclusive(min, max) {
 };
 
 //funzione inserimento 5 numeri
-function getInputNumber(array) {
-  while (array.length < 5) {
+function getInputNumber() {
+  while (arrayNumeroInput.length < 5) {
     var numeroInput = parseInt(prompt('Inserisci un numero da 1 a 100: '));
-    if (array.includes(numeroInput) == false) {
-      array.push(numeroInput);
+    if (arrayNumeroInput.includes(numeroInput) == false) {
+      arrayNumeroInput.push(numeroInput);
     }
   }
+  for (var i = 0; i < arrayRandom.length; i++) {
+    if (arrayRandom[i] == arrayNumeroInput[i]) {
+      punteggio++;
+      arrayNumeriIndovinati.push(arrayNumeroInput[i]);
+    }
+  }
+  console.log('hai totaliazzato: ',punteggio);
+  console.log('i numeri che hai indovinato sono: ',arrayNumeriIndovinati);
 };
